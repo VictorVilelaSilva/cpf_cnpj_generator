@@ -5,7 +5,6 @@ import pyperclip
 import random
 from random import randint
 
-# gerar numeros aleatorios python
 
 class GeradorCpfCnpj:
     mascara = False
@@ -15,13 +14,11 @@ class GeradorCpfCnpj:
             if cpf != cpf[::-1]:
                 break
 
-        #  Gera os dois dígitos verificadores
         for i in range(9, 11):
             value = sum((cpf[num] * ((i + 1) - num) for num in range(0, i)))
             digit = ((value * 10) % 11) % 10
             cpf.append(digit)
 
-        #  Retorna o CPF como string
         string_cpf = ''.join(map(str, cpf))
         if self.mascara:
             string_cpf = string_cpf[:3] + '.' + string_cpf[3:6] + '.' + string_cpf[6:9] + '-' + string_cpf[9:]
