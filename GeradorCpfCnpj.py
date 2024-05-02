@@ -1,5 +1,3 @@
-import pyperclip
-import random
 import keyboard
 import pyperclip
 import random
