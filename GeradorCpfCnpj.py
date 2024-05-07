@@ -48,6 +48,6 @@ gerador = GeradorCpfCnpj()
 keyboard.add_hotkey('ctrl+1', gerador.generate_cpf)
 keyboard.add_hotkey('ctrl+2', gerador.generate_cnpj)
 keyboard.add_hotkey('ctrl+*', gerador.toggle_mascara)
-keyboard.wait('esc')
+keyboard.wait('shift+1')
 
 
