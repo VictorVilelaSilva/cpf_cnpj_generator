@@ -1,6 +1,7 @@
 import keyboard
 import pyperclip
 import random
+import uuid
 from random import randint
 
 
@@ -34,19 +35,51 @@ class GeradorCpfCnpj:
         string_cnpj = "".join(str(x) for x in cnpj)
         if self.mascara:
             string_cnpj = string_cnpj[:2] + '.' + string_cnpj[2:5] + '.' + string_cnpj[5:8] + '/' + string_cnpj[8:12] + '-' + string_cnpj[12:]
+        print('CNPJ gerado: ')
         print(string_cnpj)
         pyperclip.copy(string_cnpj)
+    
+    def calcula_digito_verificador(self,rg):
+        pesos = [2, 3, 4, 5, 6, 7, 8, 9]
+        soma = sum(int(rg[i]) * pesos[i] for i in range(8))
+        resto = soma % 11
+        if resto == 0:
+            return '0'
+        elif resto == 1:
+            return 'X'
+        else:
+            return str(11 - resto)
+
+    def generate_rg(self):
+        rg = ''.join(str(random.randint(0, 9)) for _ in range(8))
+        digito_verificador = self.calcula_digito_verificador(rg)
+        rg_com_dv = rg + digito_verificador
+        if self.mascara:
+            rg_com_dv = rg_com_dv[:2] + '.' + rg_com_dv[2:5] + '.' + rg_com_dv[5:8] + '-' + rg_com_dv[8:]
+        print('RG gerado: ')
+        print(rg_com_dv)
+        pyperclip.copy(rg_com_dv)
+
+
+    def generate_uuid(self):
+        uuid_generated = str(uuid.uuid4())
+        print('UUID gerado: ')
+        print(uuid_generated)
+        pyperclip.copy(uuid_generated)
     
     def toggle_mascara(self):
         self.mascara = not self.mascara
     
     def __init__(self):
         self.mascara = False
+    
 
 gerador = GeradorCpfCnpj()
 
 keyboard.add_hotkey('ctrl+1', gerador.generate_cpf)
 keyboard.add_hotkey('ctrl+2', gerador.generate_cnpj)
+keyboard.add_hotkey('ctrl+3', gerador.generate_rg)
+keyboard.add_hotkey('ctrl+4', gerador.generate_uuid)
 keyboard.add_hotkey('ctrl+*', gerador.toggle_mascara)
 keyboard.wait('shift+1')
 
