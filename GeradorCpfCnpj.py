@@ -21,6 +21,7 @@ class GeradorCpfCnpj:
         string_cpf = ''.join(map(str, cpf))
         if self.mascara:
             string_cpf = string_cpf[:3] + '.' + string_cpf[3:6] + '.' + string_cpf[6:9] + '-' + string_cpf[9:]
+        print('CPF gerado: ')
         print(string_cpf)
         pyperclip.copy(string_cpf)
 
