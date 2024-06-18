@@ -1,12 +1,12 @@
-import keyboard
+import tkinter as tk
 import pyperclip
 import random
 import uuid
 from random import randint
 
-
 class GeradorCpfCnpj:
     mascara = False
+
     def generate_cpf(self):
         while True:
             cpf = [randint(0, 9) for i in range(9)]
@@ -21,8 +21,7 @@ class GeradorCpfCnpj:
         string_cpf = ''.join(map(str, cpf))
         if self.mascara:
             string_cpf = string_cpf[:3] + '.' + string_cpf[3:6] + '.' + string_cpf[6:9] + '-' + string_cpf[9:]
-        print('CPF gerado: ')
-        print(string_cpf)
+        self.result_label.config(text='CPF gerado: ' + string_cpf)
         pyperclip.copy(string_cpf)
 
     def generate_cnpj(self):
@@ -36,11 +35,10 @@ class GeradorCpfCnpj:
         string_cnpj = "".join(str(x) for x in cnpj)
         if self.mascara:
             string_cnpj = string_cnpj[:2] + '.' + string_cnpj[2:5] + '.' + string_cnpj[5:8] + '/' + string_cnpj[8:12] + '-' + string_cnpj[12:]
-        print('CNPJ gerado: ')
-        print(string_cnpj)
+        self.result_label.config(text='CNPJ gerado: ' + string_cnpj)
         pyperclip.copy(string_cnpj)
-    
-    def calcula_digito_verificador(self,rg):
+
+    def calcula_digito_verificador(self, rg):
         pesos = [2, 3, 4, 5, 6, 7, 8, 9]
         soma = sum(int(rg[i]) * pesos[i] for i in range(8))
         resto = soma % 11
@@ -57,31 +55,44 @@ class GeradorCpfCnpj:
         rg_com_dv = rg + digito_verificador
         if self.mascara:
             rg_com_dv = rg_com_dv[:2] + '.' + rg_com_dv[2:5] + '.' + rg_com_dv[5:8] + '-' + rg_com_dv[8:]
-        print('RG gerado: ')
-        print(rg_com_dv)
+        self.result_label.config(text='RG gerado: ' + rg_com_dv)
         pyperclip.copy(rg_com_dv)
-
 
     def generate_uuid(self):
         uuid_generated = str(uuid.uuid4())
-        print('UUID gerado: ')
-        print(uuid_generated)
+        self.result_label.config(text='UUID gerado: ' + uuid_generated)
         pyperclip.copy(uuid_generated)
-    
+
     def toggle_mascara(self):
         self.mascara = not self.mascara
-    
+
     def __init__(self):
         self.mascara = False
-    
+
+        self.root = tk.Tk()
+        self.root.title("Gerador de CPF/CNPJ")
+        self.root.geometry("400x200")
+
+        self.result_label = tk.Label(self.root, text="")
+        self.result_label.pack()
+
+        cpf_button = tk.Button(self.root, text="Gerar CPF", command=self.generate_cpf)
+        cpf_button.pack()
+
+        cnpj_button = tk.Button(self.root, text="Gerar CNPJ", command=self.generate_cnpj)
+        cnpj_button.pack()
+
+        rg_button = tk.Button(self.root, text="Gerar RG", command=self.generate_rg)
+        rg_button.pack()
+
+        uuid_button = tk.Button(self.root, text="Gerar UUID", command=self.generate_uuid)
+        uuid_button.pack()
+
+        mascara_button = tk.Button(self.root, text="Toggle Máscara", command=self.toggle_mascara)
+        mascara_button.pack()
+
+        self.root.mainloop()
+
 
 gerador = GeradorCpfCnpj()
-
-keyboard.add_hotkey('ctrl+1', gerador.generate_cpf)
-keyboard.add_hotkey('ctrl+2', gerador.generate_cnpj)
-keyboard.add_hotkey('ctrl+3', gerador.generate_rg)
-keyboard.add_hotkey('ctrl+4', gerador.generate_uuid)
-keyboard.add_hotkey('ctrl+*', gerador.toggle_mascara)
-keyboard.wait('shift+1')
-
 
