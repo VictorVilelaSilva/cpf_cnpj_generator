@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import PhotoImage, Label
 import pyperclip
 import random
 import uuid
@@ -70,26 +71,39 @@ class GeradorCpfCnpj:
         self.mascara = False
 
         self.root = tk.Tk()
-        self.root.title("Gerador de CPF/CNPJ")
-        self.root.geometry("400x200")
+        self.root.title("4Devs")
+        self.root.geometry("600x300")
+        background_image = PhotoImage(file='fundo.png')
+
+        # Crie um Label para exibir a imagem e o posicione como fundo
+        background_label = Label(self.root, image=background_image)
+        background_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+        # Certifique-se de manter uma referência à imagem para evitar a coleta de lixo
+        background_label.image = background_image
 
         self.result_label = tk.Label(self.root, text="")
-        self.result_label.pack()
+        self.result_label.pack(pady=(10, 10))
+        self.result_label.config(fg='white',bg='#333333',borderwidth=2.5, relief="groove")
+
+        
+        
 
         cpf_button = tk.Button(self.root, text="Gerar CPF", command=self.generate_cpf)
-        cpf_button.pack()
+        cpf_button.pack(pady=(0, 10))
 
+        #adiciona um espaço entre os botoes
         cnpj_button = tk.Button(self.root, text="Gerar CNPJ", command=self.generate_cnpj)
-        cnpj_button.pack()
+        cnpj_button.pack(pady=(0, 10))
 
         rg_button = tk.Button(self.root, text="Gerar RG", command=self.generate_rg)
-        rg_button.pack()
+        rg_button.pack(pady=(0, 10))
 
         uuid_button = tk.Button(self.root, text="Gerar UUID", command=self.generate_uuid)
-        uuid_button.pack()
+        uuid_button.pack(pady=(0, 10))
 
         mascara_button = tk.Button(self.root, text="Toggle Máscara", command=self.toggle_mascara)
-        mascara_button.pack()
+        mascara_button.pack(pady=(0, 10))
 
         self.root.mainloop()
 
