@@ -73,14 +73,7 @@ class GeradorCpfCnpj:
         self.root = tk.Tk()
         self.root.title("4Devs")
         self.root.geometry("600x300")
-        background_image = PhotoImage(file='fundo.png')
-
-        # Crie um Label para exibir a imagem e o posicione como fundo
-        background_label = Label(self.root, image=background_image)
-        background_label.place(x=0, y=0, relwidth=1, relheight=1)
-
-        # Certifique-se de manter uma referência à imagem para evitar a coleta de lixo
-        background_label.image = background_image
+        self.root.configure(bg='#000000')
 
         self.result_label = tk.Label(self.root, text="")
         self.result_label.pack(pady=(10, 10))
