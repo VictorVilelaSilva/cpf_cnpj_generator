@@ -79,13 +79,9 @@ class GeradorCpfCnpj:
         self.result_label.pack(pady=(10, 10))
         self.result_label.config(fg='white',bg='#333333',borderwidth=2.5, relief="groove")
 
-        
-        
-
         cpf_button = tk.Button(self.root, text="Gerar CPF", command=self.generate_cpf)
         cpf_button.pack(pady=(0, 10))
 
-        #adiciona um espaço entre os botoes
         cnpj_button = tk.Button(self.root, text="Gerar CNPJ", command=self.generate_cnpj)
         cnpj_button.pack(pady=(0, 10))
 
