@@ -25,7 +25,6 @@ def generate_cpf(mask: bool) -> str:
         )
     return string_cpf
 
-
 def generate_cnpj(mask):
     cnpj = [random.randrange(10) for _ in range(8)] + [0, 0, 0, 1]
     for _ in range(2):
@@ -47,7 +46,6 @@ def generate_cnpj(mask):
         )
     return string_cnpj
 
-
 def digit_verifier_calculator(rg):
     weights = [2, 3, 4, 5, 6, 7, 8, 9]
     total = sum(int(rg[i]) * weights[i] for i in range(8))
@@ -58,7 +56,6 @@ def digit_verifier_calculator(rg):
         return "X"
     else:
         return str(11 - remainder)
-
 
 def generate_rg(mask: bool) -> str:
     rg = "".join(str(random.randint(0, 9)) for _ in range(8))

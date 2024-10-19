@@ -14,16 +14,12 @@ btn = tk.Button(root, text="Gerar CPF")
 btn.pack(pady=20)
 label = tk.Label(root,text="",width=10,height=4,border=2,borderwidth=3,relief="groove")
 label.pack(pady=20)
-
-
 def monitorar_cor_mouse():
     while True:
         x, y = pyautogui.position()
         screenshot = ImageGrab.grab()
         cor = screenshot.getpixel((x, y))
         cor_hex = '#%02x%02x%02x' % cor
-        print(f"Posição do mouse: ({x}, {y}), Cor: {cor_hex}")
-        label.config(bg=cor_hex)
         time.sleep(0.05)
 
 def get_mouse_color():
@@ -38,12 +34,9 @@ def get_mouse_color():
         screenshot = ImageGrab.grab(bbox=(monitor.x, monitor.y, monitor.x + monitor.width, monitor.y + monitor.height),all_screens=True)
         cor = screenshot.getpixel((x, y))
         cor_hex = '#%02x%02x%02x' % cor
-        print(f"Posição do mouse: ({x}, {y}), Monitor:{monitor.name}, Cor: {cor_hex}")
         label.config(bg=cor_hex)
-        # time.sleep(0.05)
 
 thread = threading.Thread(target=get_mouse_color)
 thread.daemon = True
 thread.start()
-
 root.mainloop()
