@@ -5,6 +5,9 @@ on:
     tags:
       - '*'
 
+permissions:
+  releases: write 
+  
 jobs:
   build:
     name: Build app
