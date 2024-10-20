@@ -15,7 +15,7 @@ jobs:
         config:
           - os: ubuntu-22.04
           - os: macos-latest
-          - os: windows-2019
+          - os: windows-2022
     steps:
       - name: Install tk on ubuntu
         if: ${{ matrix.config.os == 'ubuntu-22.04'}}
@@ -24,10 +24,10 @@ jobs:
           sudo apt install python3-tk python3-dev python3-setuptools tcl
 
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12.5'
 
@@ -44,10 +44,12 @@ jobs:
         run: mv ./dist ./dist-${{ matrix.config.os }}
 
       - name: Upload result job ${{ matrix.config.os }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: main-pyinstaller-artifact
+          name: FD4D-pyinstaller-artifact-${{ github.run_number }} 
           path: ./dist*
+          if-no-files-found: error 
+          overwrite: true
 
   release:
     name: Release
@@ -55,24 +57,24 @@ jobs:
     needs: build
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
-          name: main-pyinstaller-artifact
+          name:  FD4D-pyinstaller-artifact-${{ github.run_number }} 
 
       - name: Zip file windows
         run: zip -r FD4D_windows.zip dist-windows-*
 
       - name: Zip file ubuntu
-        run: zip -r FD4D_ubuntu.zip dist-ubuntu-*
+        run: zip -r FD4D_ubuntu.zip . -i dist-ubuntu-*
 
       - name: Zip file macos
-        run: zip -r FD4D_macos.zip dist-macos-*
+        run: zip -r FD4D_macos.zip . -i dist-macos-*
 
       - name: Create Release
         id: create_release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
           tag_name: ${{ github.ref }}
           draft: false
