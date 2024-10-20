@@ -65,5 +65,4 @@ Caso deseje gerar um executável, execute o comando abaixo:
 ```sh
 pyinstaller main.spec
 ```
-
 [banner]: assets/Images/Banner.png
