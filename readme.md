@@ -67,4 +67,3 @@ pyinstaller main.spec
 ```
 
 [banner]: assets/Images/Banner.png
-
