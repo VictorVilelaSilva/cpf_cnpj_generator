@@ -1,3 +1,5 @@
+#arquvos para pegar fontes
+
 from tkinter import *
 from tkinter import font
 
