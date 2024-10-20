@@ -1,14 +1,18 @@
 from assets.functions.ColorPickFuntions import get_mouse_hex_color, hex_to_rgb, rgb_to_cmyk
 from assets.functions.GeneratorFunctions import generate_cnpj, generate_cpf, generate_rg
-from PIL import Image,ImageTk
 from assets.constants.Constants import BACKGROUND_COLOR, HEIGHT_ROOT, WIDTH_ROOT
+from PIL import Image,ImageTk
+from assets.functions.tools import local_path
+from pathlib import Path
 import tkinter as tk
-import keyboard
 import pyperclip
+import threading
+import keyboard
 import uuid
 import time
-import threading
 
+# Resolve o bug de diretorio base ao compilar com o pyinstaller
+base_path = local_path()
 
 class MainWindow:
     mask: bool = False
@@ -56,7 +60,7 @@ class MainWindow:
             "width":( WIDTH_ROOT / 2)-2,
             "height": HEIGHT_ROOT,
         }
-        image_path = "assets/images/logo.png"
+        image_path = base_path / Path("assets/images/logo.png")
 
         root.geometry("{0}x{1}".format(WIDTH_ROOT, HEIGHT_ROOT))
         root.configure(bg=BACKGROUND_COLOR)
@@ -175,7 +179,7 @@ class MainWindow:
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("FD4D")
-    root.iconbitmap("assets/images/logo.ico")
+    root.iconbitmap(base_path / Path("assets/images/logo.ico"))
     root.resizable(False, False)
 
     generator = MainWindow(root)
