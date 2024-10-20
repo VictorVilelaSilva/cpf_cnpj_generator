@@ -57,16 +57,16 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: main-pyinstaller-artifact
+          name: main-pyinstaller-artifact-${{ github.run_id }}-${{ github.run_number }}
 
       - name: Zip file windows
-        run: zip -r FD4D_windows.zip dist-windows-*
+        run: zip -r FD4D_windows_${{ github.run_id }}.zip dist-windows-*
 
       - name: Zip file ubuntu
-        run: zip -r FD4D_ubuntu.zip dist-ubuntu-*
+        run: zip -r FD4D_ubuntu_${{ github.run_id }}.zip dist-ubuntu-*
 
       - name: Zip file macos
-        run: zip -r FD4D_macos.zip dist-macos-*
+        run: zip -r FD4D_macos_${{ github.run_id }}.zip dist-macos-*
 
       - name: Create Release
         id: create_release
@@ -78,6 +78,6 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            FD4D_windows.zip
-            FD4D_ubuntu.zip
-            FD4D_macos.zip
+            FD4D_windows_${{ github.run_id }}.zip
+            FD4D_ubuntu_${{ github.run_id }}.zip
+            FD4D_macos_${{ github.run_id }}.zip
