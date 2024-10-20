@@ -57,7 +57,10 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: main-pyinstaller-artifact-${{ github.run_number }} 
+          name: main-pyinstaller-artifact
+          path: dist-windows-*
+          if-no-files-found: error 
+          overwrite: true
 
       - name: Zip file windows
         run: zip -r FD4D_windows.zip dist-windows-*
