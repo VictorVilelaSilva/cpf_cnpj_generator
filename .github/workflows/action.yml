@@ -67,14 +67,15 @@ jobs:
         with:
           name:  FD4D-pyinstaller-artifact-${{ matrix.os }}
 
-      - name: Zip file windows
-        run: zip -r FD4D_windows.zip dist-windows-*
-
-      - name: Zip file ubuntu
-        run: zip -r FD4D_ubuntu.zip . -i dist-ubuntu-*
-
-      - name: Zip file macos
-        run: zip -r FD4D_macos.zip . -i dist-macos-*
+      - name: Zip files
+        run: |
+          if [ "${{ matrix.os }}" == "windows-2022" ]; then
+            zip -r FD4D_windows.zip dist-windows-*
+          elif [ "${{ matrix.os }}" == "ubuntu-22.04" ]; then
+            zip -r FD4D_ubuntu.zip . -i dist-ubuntu-*
+          else
+            zip -r FD4D_macos.zip . -i dist-macos-*
+          fi
 
       - name: Create Release
         id: create_release
