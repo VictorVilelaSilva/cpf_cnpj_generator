@@ -1,34 +1,43 @@
 
-# Projeto FD4D
-
+# Projeto FD4D - Ferramentas para Desenvolvedores
 ![img][banner]
 
 
 ## Sobre o Projeto
-Estre projeto foi desenvolvido com intuito de facilitar a vida de quem trabalha com desenvolvimento de software, fornecendo ferramentas para geração de CPF e CNPJ válidos, além da disponibilização de uma ferramenta para captura de cores.
+Este projeto foi desenvolvido com o intuito de facilitar a vida de quem trabalha com desenvolvimento de software, fornecendo ferramentas para a geração de CPF, CNPJ, RG válidos, assim como a geração de UUID, além de uma ferramenta para captura de cores.
+> [!NOTE]
+>Ainda há muito a ser adicionado, mas, por enquanto, é apenas um ponto de partida, com as funcionalidades que mais utilizo no dia a dia.
+### Bibliotecas Utilizadas
+- Tkinter - Para a interface gráfica
+- PyInstaller - Para gerar executáveis
+- Pyperclip - Para copiar dados para a área de transferência
+- threading - Para executar funções em paralelo
+- pyautogui - Para capturar a posição do mouse
+- PIL - Para capturar a cor do pixel onde o mouse está
 
-### atalhos de teclado
+## Download
+Abaixo voce consegue fazer o dowload para do executavel para os principais sistemas operacionais:
+
+- [Windows](https://github.com/VictorVilelaSilva/FD4D/releases/download/2.0.0/FD4D_windows.zip)
+- [Linux](https://github.com/VictorVilelaSilva/FD4D/releases/download/2.0.0/FD4D_ubuntu.zip)
+- [MacOS](https://github.com/VictorVilelaSilva/FD4D/releases/download/2.0.0/FD4D_macos.zip)
+
+> [!NOTE]
+> So consegui testar o exeutavel para windows, então se tiver algum problema com os outros sistemas operacionais por favor abrir uma issue para que eu possa corrigir.
+
+> [!IMPORTANT]
+> É comum que o sistema operacional exiba avisos ao executar arquivos .exe gerados com o PyInstaller. Você pode desconsiderar essa mensagem, mas se ainda assim não se sentir seguro, pode rodar o código-fonte, que está disponível no repositório.
+
+
+### Atalhos disponíveis
 - **ctrl+1**: Gera um CPF válido.
 - **ctrl+2**: Gera um CNPJ válido.
 - **ctrl+3**: Gera um RG válido.
 - **ctrl+4**: Gera um UUID.
-- **ctrl+**: Alterna entre máscara de CPF e CNPJ.
+- **ctrl+***: Alterna entre máscara de CPF e CNPJ.
 - **ctrl+alt+h**: Copia a cor hexadecimal para a área de transferência.
 - **ctrl+alt+r**: Copia a cor RGB para a área de transferência.
 - **ctrl+alt+c**: Copia a cor CMYK para a área de transferência.
-
-
-### Descrição dos Arquivos
-
-- **assets/constants/Constants.py**: Contém constantes utilizadas no projeto.
-- **assets/functions/ColorPickFuntions.py**: Funções relacionadas à captura de cores.
-- **assets/functions/GeneratorFunctions.py**: Funções para geração de CPF e CNPJ.
-- **helpers/TkinterFonts.py**: Configurações de fontes para a interface `tkinter`.
-- **main.py**: Arquivo principal para execução da aplicação.
-- **monitor.py**: Monitoramento de cores do pixel sob o mouse.
-- **requirements.txt**: Arquivo com as dependências do projeto.
-- **main.spec**: Arquivo de configuração para geração de executável com o `PyInstaller`.
-
 
 ## Instalação
 
